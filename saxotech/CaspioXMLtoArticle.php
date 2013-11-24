@@ -93,11 +93,11 @@ if ($_POST['saveIt']) {
 		$conn = ftp_connect($url); //Insert Saxo FTP URL
 		$login = ftp_login($conn,$usr,$pass); //Connection info
 		if (!$conn || !$login) { die('Connection attempt is a fail');};
-		if ($upload = ftp_put($conn, '/Inputs/XML/'.$ydeeds.'.xml',$ydeeds.'.xml', FTP_ASCII)) {
-			echo 'York worked';
+		if (!$upload = ftp_put($conn, '/Inputs/XML/'.$ydeeds.'.xml',$ydeeds.'.xml', FTP_ASCII)) {
+			die('York failed');
 		}
-		if ($upload = ftp_put($conn, '/Inputs/XML/'.$adeeds.'.xml',$adeeds.'.xml', FTP_ASCII)) {
-			echo 'Adams worked.';
+		if (!$upload = ftp_put($conn, '/Inputs/XML/'.$adeeds.'.xml',$adeeds.'.xml', FTP_ASCII)) {
+			die('Adams failed');	
 		}
 		ftp_close($conn);
 	}
